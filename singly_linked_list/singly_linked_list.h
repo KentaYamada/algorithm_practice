@@ -17,7 +17,7 @@ typedef struct singly_linked_list_t {
 /**
  * 単方向リスト初期化
  */
-void init_singly_linked_list(SinglyLinkedList *header);
+void singly_linked_list_init(SinglyLinkedList *header);
 
 /**
  * 要素作成

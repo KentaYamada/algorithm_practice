@@ -5,7 +5,21 @@
 #include "singly_linked_list.h"
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+void singly_linked_list_init(SinglyLinkedList *header) {
+  SinglyLinkedList *current = header;
+
+  if (current->next != NULL) {
+    singly_linked_list_init(current->next);
+    current->next = NULL;
+  }
+
+  free(current);
+  current = NULL;
+}
 
 SinglyLinkedList *singly_linked_list_create_cell() {
   SinglyLinkedList *cell =
@@ -19,7 +33,8 @@ SinglyLinkedList *singly_linked_list_create_cell() {
 void singly_linked_list_insert_cell(SinglyLinkedList *header,
                                     SinglyLinkedList *cell, const int index) {
   if (index == 0) {
-    // 先頭への挿入は処理が異なるのでここではしない
+    cell->next = header;
+    header = cell;
     return;
   }
 
@@ -41,7 +56,7 @@ void singly_linked_list_append(SinglyLinkedList *header, const int value) {
   SinglyLinkedList *current = NULL;
 
   for (current = header; current != NULL; current = current->next) {
-    if (current->next == NULL) {
+    if (current->next != NULL) {
       SinglyLinkedList *newCell = singly_linked_list_create_cell();
       newCell->value = value;
       current->next = newCell;

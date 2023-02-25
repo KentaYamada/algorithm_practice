@@ -4,6 +4,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static void succeeded_singly_linked_list_init() {
+  puts("Run succeeded_singly_linked_list_init");
+
+  SinglyLinkedList *cell2 = singly_linked_list_create_cell();
+  cell2->value = 30;
+
+  SinglyLinkedList *cell1 = singly_linked_list_create_cell();
+  cell1->value = 20;
+  cell1->next = cell2;
+
+  SinglyLinkedList *header = singly_linked_list_create_cell();
+  header->value = 10;
+  header->next = cell1;
+
+  puts("割り当てチェック");
+  SinglyLinkedList *p = NULL;
+  for (p = header; p != NULL; p = p->next) {
+    printf("value: %d, address: %p\n", p->value, p);
+  }
+
+  singly_linked_list_init(header);
+
+  puts("解放チェック");
+  assert(header->next == NULL);
+
+  cell2 = NULL;
+  cell1 = NULL;
+  header = NULL;
+  puts("succeeded_singly_linked_list_init end");
+}
+
 static void succeded_singly_linked_list_create_cell() {
   puts("Run succeded_singly_linked_list_create_cell");
 
@@ -123,6 +154,9 @@ static void succeeded_list_is_empty() {
 }
 
 int main() {
+  // 単方向リストの初期化チェック
+  succeeded_singly_linked_list_init();
+
   // 単方向リストの要素作成チェック
   succeded_singly_linked_list_create_cell();
 
