@@ -10,10 +10,9 @@
  * 単方向リストの実態
  */
 typedef struct singly_linked_list_t {
-    struct singly_linked_list_t *next; // 次の要素へのポインタ
-    int value; // 要素の値
+  struct singly_linked_list_t *next; // 次の要素へのポインタ
+  int value;                         // 要素の値
 } SinglyLinkedList;
-
 
 /**
  * 単方向リスト初期化
@@ -23,12 +22,18 @@ void init_singly_linked_list(SinglyLinkedList *header);
 /**
  * 要素作成
  */
-SinglyLinkedList* singly_linked_list_create_cell();
+SinglyLinkedList *singly_linked_list_create_cell();
+
+/**
+ * 末尾に要素追加
+ */
+void singly_linked_list_append(SinglyLinkedList *header, const int value);
 
 /**
  * 指定した要素に挿入
  */
-void singly_linked_list_insert_cell(SinglyLinkedList* header, SinglyLinkedList* elm, const int index);
+void singly_linked_list_insert_cell(SinglyLinkedList *header,
+                                    SinglyLinkedList *elm, const int index);
 
 /**
  * 指定した要素を削除
